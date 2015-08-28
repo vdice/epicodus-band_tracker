@@ -1,6 +1,6 @@
 # Band Tracker and Management App
 
-##### _A web app for Fans to manage bands and track their concert venues, August 28, 2015_
+##### _A web app for Fans to manage Bands and track their Concert Venues, August 28, 2015_
 
 #### By **_Vaughn Dice_**
 
@@ -8,14 +8,15 @@
 
 _Using this app, users can:_
 * _View, add, update and delete Bands,_
-* _Add venues_
-* _Add and view venues for a particular band._
+* _View and add venues_
+* _View and add venues for a particular Band._
 
 ## Setup
 
 * _Clone this repository_
 * _Install necessary dependencies with: `bundle`_
-* _Migrate db with:_
+* _Setup database with:_
+
 ```
 rake db:create
 rake db:migrate
