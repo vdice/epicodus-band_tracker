@@ -1,6 +1,6 @@
 require('spec_helper')
 
-describe('the venue pages', {:type => :feature}) do
+describe('Band Tracker: the venue pages', {:type => :feature}) do
 
   describe('initial view') do
     it('greets the user with venue creation options') do
@@ -16,9 +16,18 @@ describe('the venue pages', {:type => :feature}) do
       visit('/venues')
       fill_in('venue_name', :with => 'cervante\'s masterpiece ballroom')
       click_button('Add')
-      expect(page).to have_content('Your Venues:')
       expect(page).to have_content('Cervante\'s Masterpiece Ballroom')
     end
   end
 
+  describe('viewing all venues') do
+    it('allows the users to view all created venues') do
+      venue_one = Venue.create({:name => 'Glasgow Royal Concert Hall'})
+      venue_two = Venue.create({:name => 'Portland International Raceway'})
+      visit('/venues')
+      expect(page).to have_content('Your Venues:')
+      expect(page).to have_content(venue_one.name())
+      expect(page).to have_content(venue_two.name())
+    end
+  end
 end

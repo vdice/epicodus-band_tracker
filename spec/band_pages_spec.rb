@@ -1,6 +1,6 @@
 require('spec_helper')
 
-describe('the band pages', {:type => :feature}) do
+describe('Band Tracker: the band pages', {:type => :feature}) do
 
   describe('initial view') do
     it('greets the user with band management options') do
@@ -18,6 +18,17 @@ describe('the band pages', {:type => :feature}) do
       click_button('Add')
       expect(page).to have_content('Your Bands:')
       expect(page).to have_content('The Sonics')
+    end
+  end
+
+  describe('viewing all bands') do
+    it('allows the users to view all created bands') do
+      band_one = Band.create({:name => 'Homeshake'})
+      band_two = Band.create({:name => 'Cate Le Bon'})
+      visit('/bands')
+      expect(page).to have_content('Your Bands:')
+      expect(page).to have_content(band_one.name())
+      expect(page).to have_content(band_two.name())
     end
   end
 
