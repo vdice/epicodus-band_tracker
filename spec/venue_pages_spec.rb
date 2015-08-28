@@ -1,11 +1,11 @@
 require('spec_helper')
 
-describe('Band Tracker: the venue pages', {:type => :feature}) do
+describe('Band Tracker: the venue pages', @config) do
 
-  describe('initial view') do
+  describe('initial view', {:js => true}) do
     it('greets the user with venue creation options') do
       visit('/')
-      click_link('Manage Venues')
+      find('#venues_button').click
       expect(page).to have_content('You don\'t have any venues, yet!')
       expect(page).to have_content('Add a New Venue')
     end

@@ -1,11 +1,11 @@
 require('spec_helper')
 
-describe('Band Tracker: the band pages', {:type => :feature}) do
+describe('Band Tracker: the band pages', @config) do
 
-  describe('initial view') do
+  describe('initial view', {:js => true}) do
     it('greets the user with band management options') do
       visit('/')
-      click_link('Manage Bands')
+      find('#bands_button').click
       expect(page).to have_content('You don\'t have any bands to manage, yet!')
       expect(page).to have_content('Add a New Band')
     end

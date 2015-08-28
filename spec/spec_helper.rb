@@ -6,8 +6,18 @@ set(:root, Dir.pwd())
 Dir[File.dirname(__FILE__) + '/../lib/*.rb'].each { |file| require file }
 
 require('capybara/rspec')
-Capybara.app = Sinatra::Application
+require('capybara/poltergeist')
+require('phantomjs')
+require('tilt/erb')
 require('./app')
+Capybara.app = Sinatra::Application
+
+# Poltergeist driver setup for tests depending on javascript
+@config = {:type => :feature}
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, :phantomjs => Phantomjs.path, :js_errors => false)
+end
+Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   config.after(:each) do

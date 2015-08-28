@@ -1,6 +1,89 @@
-<h1>Welcome to the Band Tracker App</h1>
-<br>
-<a href="/bands">Manage Bands</a>
-<br>
-<a href="/venues">Manage Venues</a>
-<br>
+<!-- Nav Tabs -->
+<div class="panel-body">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#bands" aria-controls="bands" role="tab" data-toggle="tab">Bands</a></li>
+    <li role="presentation"><a href="#venues" aria-controls="venues" role="tab" data-toggle="tab">Venues</a></li>
+  </ul>
+</div>
+
+<!-- Tab Content -->
+<div class="tab-content">
+
+  <!-- Bands Tab -->
+  <div role="tabpanel" class="tab-pane fade in active" id="bands">
+    <% if @bands.any?() %>
+      <% @bands.each() do |band| %>
+        <div class="row">
+          <div class="container-fluid">
+              <div class="panel-group" id="accordion">
+                  <div class="panel panel-default">
+                      <a class="panel-default" data-toggle="collapse" data-parent="#accordion_band_<%= band.id() %>" href="#collapse_band_<%= band.id() %>">
+                      <div class="panel-heading">
+                          <h4 class="panel-title">
+                          <%= band.name() %>
+                          </h4>
+                      </div>
+                      </a>
+                      <div id="collapse_band_<%= band.id() %>" class="panel-collapse collapse">
+                          <div class="list-group">
+                            <ul class="fa-ul">
+                          <% if band.venues().any?() %>
+                            <% band.venues().each() do |venue| %>
+                              <li><i class="fa-li fa fa-user"></i><a href="/venues/<%= venue.id() %>"><%= venue.name() %></a> </li>
+                            <% end %>
+                          <% end %>
+                        </ul>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>
+        You don't have any bands yet! You can add them <a href="/bands">here.</a>
+      </p>
+    <% end %>
+  </div>
+
+  <!-- Venues Tab -->
+  <div role="tabpanel" class="tab-pane fade" id="venues">
+    <% if @venues.any? %>
+      <% @venues.each() do |venue| %>
+      <div class="row" id="venues">
+        <div class="container-fluid">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a class="panel-default" data-toggle="collapse" data-parent="#accordion_venue_<%= venue.id() %>" href="#collapse_venue_<%= venue.id() %>">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <%= venue.name() %>
+                        </h4>
+                    </div>
+                    </a>
+                    <div id="collapse_venue_<%= venue.id() %>" class="panel-collapse collapse">
+                        <div class="list-group">
+                          Band/s:
+                          <ul class="fa-ul">
+                            <% if venue.bands.any? %>
+                              <% venue.bands.each() do |band| %>
+                                <li><i class="fa-li fa fa-cogs"></i><a href="/bands/<%= band.id() %>"><%= band.name %></a></li>
+                              <% end %>
+                            <% end %>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>
+      You don't have any venues yet! You can add them <a href="/venues">here.</a>
+    </p>
+  <% end %>
+
+</div>
