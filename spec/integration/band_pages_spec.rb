@@ -64,5 +64,16 @@ describe('Band Tracker: the band pages', @config) do
       expect(page).to have_selector('#venue_listing', text: venue_one.name())
       expect(page).to_not have_selector('#venue_listing', text: venue_two.name())
     end
+
+    it('will not add a duplicate entry') do
+      band = Band.create({:name => 'The Sonics'})
+      venue = Venue.create({:name => 'Glasgow Royal Concert Hall'})
+      visit("/bands/#{band.id()}")
+      find('#venue_select').find("#option_#{venue.id()}").select_option
+      click_button('Add')
+      find('#venue_select').find("#option_#{venue.id()}").select_option
+      click_button('Add')
+      expect(page).to_not have_selector('#venue_listing > ul > li:nth-child(2)')
+    end
   end
 end

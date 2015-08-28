@@ -44,7 +44,7 @@ end
 patch('/bands/:id/add_venue') do
   @band = Band.find(params.fetch('id').to_i())
   new_venue = Venue.find(params.fetch('venue_select').to_i())
-  @band.venues.push(new_venue)
+  @band.venues.push(new_venue) unless @band.venues.include?(new_venue)
   redirect("/bands/#{@band.id()}")
 end
 

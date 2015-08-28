@@ -10,15 +10,8 @@ require('capybara/poltergeist')
 require('phantomjs')
 require('tilt/erb')
 require('./app')
-Capybara.app = Sinatra::Application
 
-# Poltergeist driver setup for tests depending on javascript
-@config = {:type => :feature}
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, :phantomjs => Phantomjs.path, :js_errors => false)
-end
-Capybara.javascript_driver = :poltergeist
-
+# RSpec/Unit config
 RSpec.configure do |config|
   config.after(:each) do
     Band.all().each() do |band|
@@ -30,3 +23,13 @@ RSpec.configure do |config|
     end
   end
 end
+
+# Capybara/Integration config
+Capybara.app = Sinatra::Application
+
+# Poltergeist driver setup for integration tests that depend on javascript
+@config = {:type => :feature}
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, :phantomjs => Phantomjs.path, :js_errors => false)
+end
+Capybara.javascript_driver = :poltergeist
