@@ -22,6 +22,7 @@ end
 # Update/Delete Band
 
 get('/bands/:id') do
+  @venues = Venue.all()
   @band = Band.find(params.fetch('id').to_i())
   erb(:band)
 end
@@ -35,7 +36,14 @@ patch('/bands/:id') do
   @band = Band.find(params.fetch('id').to_i())
   new_band_name = params.fetch('band_name')
   @band.update({:name => new_band_name})
-  erb(:band)
+  redirect("/bands/#{@band.id()}")
+end
+
+patch('/bands/:id/add_venue') do
+  @band = Band.find(params.fetch('id').to_i())
+  new_venue = Venue.find(params.fetch('venue_select').to_i())
+  @band.venues.push(new_venue)
+  redirect("/bands/#{@band.id()}")
 end
 
 # Create/Read Venues

@@ -1,17 +1,62 @@
 <h1>Band: <i><%= @band.name() %></i></h1>
 <br>
+
+<!-- Venues listing -->
+<br>
+<label for="venue_listing"><i><%= @band.name() %></i>
+  <% if @band.name()[-1, 1].eql?('s') %>have<% else %>has<% end %> played the following Venues:</label>
+<div id="venue_listing">
+  <% if @band.venues.any?() %>
+    <ul>
+      <% @band.venues.each() do |venue| %>
+        <li><%= venue.name() %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>
+      <%= @band.name() %> hasn't played any venues yet.  You can add them <a href="#add_venue_form">here.</a>
+    </p>
+  <% end %>
+</div>
+
+<!-- Add Venue to Band -->
+<% if @venues.any?() %>
+  <br><br>
+  <label for="add_venue_form">Add Venues for <i><%= @band.name() %></i></label>
+  <form id="add_venue_form" action="/bands/<%= @band.id() %>/add_venue" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <div class="form-group">
+      <label for="venue_select">Venue Played</label>
+      <select id="venue_select" name="venue_select" type="text" class="form-control">
+        <% @venues.each() do |venue| %>
+          <option id="option_<%= venue.id() %>" value="<%= venue.id() %>"><%= venue.name() %></option>
+        <% end %>
+      </select>
+    </div>
+    <button type="submit" name="btn btn-primary">Add</button>
+  </form>
+<% else %>
+  <p>
+    If you'd like to add venues to this band, please create them <a href="/venues">here.</a>
+  </p>
+<% end %>
+
 <!-- Update Band -->
+<br><br>
 <label for="update_form">Update <i><%= @band.name() %></i></label>
 <form id="update_form" action="/bands/<%= @band.id() %>" method="post">
   <input type="hidden" name="_method" value="patch">
+
   <div class="form-group">
     <label for="band_name">New Band Name</label>
-    <input type="text" name="band_name" id="band_name" required>
+    <input type="text" name="band_name" id="band_name" class="form-control" required>
   </div>
   <button type="submit" class="btn btn-primary">Update</button>
 </form>
 
 <!-- Delete Band -->
+<br><br>
 <label for="delete_form">Delete <i><%= @band.name() %></i></label>
 <form id="delete_form" action="/bands/<%= @band.id() %>" method="post">
   <input type="hidden" name="_method" value="delete">
