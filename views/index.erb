@@ -29,7 +29,7 @@
                             <% if band.venues().any?() %>
                               <ul class="fa-ul"><p>Venues played:</p>
                                 <% band.venues().each() do |venue| %>
-                                  <li><i class="fa-li fa fa-music"></i><a href="/venues/<%= venue.id() %>"><%= venue.name() %></a> </li>
+                                  <li><i class="fa-li fa fa-music"></i><%= venue.name() %></li>
                                 <% end %>
                               </ul>
                             <% end %>

@@ -1,4 +1,11 @@
-<h1>Band: <i><%= @band.name() %></i></h1>
+<!-- Band name with delete button -->
+<form id="delete_form" class="form-inline" role="form" action="/bands/<%= @band.id() %>" method="post">
+  <div class="form-group">
+    <input type="hidden" name="_method" value="delete">
+    <h1>Band: <i><%= @band.name() %></i></h1>
+  </div>
+  <button id="delete_button" type="submit" class="glyphicon btn-danger"><i class="fa fa-trash-o"></i></button>
+</form>
 <br>
 
 <!-- Venues listing -->
@@ -51,16 +58,8 @@
   <input type="hidden" name="_method" value="patch">
 
   <div class="form-group">
-    <label for="band_name">New Band Name</label>
+    <label for="band_name">Name</label>
     <input type="text" name="band_name" id="band_name" class="form-control" required>
   </div>
   <button type="submit" class="btn btn-primary">Update</button>
-</form>
-
-<!-- Delete Band -->
-<br><br>
-<label for="delete_form">Delete <i><%= @band.name() %></i></label>
-<form id="delete_form" action="/bands/<%= @band.id() %>" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <button type="submit" class="btn btn-danger">Delete</button>
 </form>

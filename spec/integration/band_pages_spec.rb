@@ -37,7 +37,7 @@ describe('Band Tracker: the band pages', @config) do
       band = Band.create({:name => 'The Sonics'})
       visit('/bands')
       click_link(band.name())
-      click_button('Delete')
+      find('#delete_button').click
       expect(page).to have_content('You don\'t have any bands to manage, yet!')
     end
   end
