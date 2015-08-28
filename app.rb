@@ -30,3 +30,10 @@ delete('/bands/:id') do
   Band.find(params.fetch('id').to_i()).destroy()
   redirect('/bands')
 end
+
+patch('/bands/:id') do
+  @band = Band.find(params.fetch('id').to_i())
+  new_band_name = params.fetch('band_name')
+  @band.update({:name => new_band_name})
+  erb(:band)
+end
