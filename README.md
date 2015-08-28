@@ -6,6 +6,8 @@
 
 ## Description
 
+_**This app is live!** It has been deployed via Heroku and can be seen  [**here**](https://epicodus-band-tracker.herokuapp.com/)._
+
 _Using this app, users can:_
 * _View, add, update and delete Bands,_
 * _View and add venues_
