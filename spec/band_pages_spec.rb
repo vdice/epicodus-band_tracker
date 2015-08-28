@@ -47,7 +47,7 @@ describe('the band pages', {:type => :feature}) do
       venue_one = Venue.create({:name => 'Glasgow Royal Concert Hall'})
       venue_two = Venue.create({:name => 'Portland International Raceway'})
       visit("/bands/#{band.id()}")
-      expect(page).to have_content(band.name() + ' hasn\'t played any venues yet.')
+      expect(page).to have_content("#{band.name()} #{band.modifier()}n't played any venues yet.")
       find('#venue_select').find("#option_#{venue_one.id()}").select_option
       click_button('Add')
       expect(page).to have_selector('#venue_listing', text: venue_one.name())

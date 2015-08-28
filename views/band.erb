@@ -2,25 +2,27 @@
 <br>
 
 <!-- Venues listing -->
-<br>
-<label for="venue_listing"><i><%= @band.name() %></i>
-  <% if @band.name()[-1, 1].eql?('s') %>have<% else %>has<% end %> played the following Venues:</label>
-<div id="venue_listing">
-  <% if @band.venues.any?() %>
-    <ul>
-      <% @band.venues.each() do |venue| %>
-        <li><%= venue.name() %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>
-      <%= @band.name() %> hasn't played any venues yet.  You can add them <a href="#add_venue_form">here.</a>
-    </p>
-  <% end %>
-</div>
-
-<!-- Add Venue to Band -->
 <% if @venues.any?() %>
+  <br>
+  <label for="venue_listing">Venue Listing</label>
+  <div id="venue_listing">
+    <% if @band.venues.any?() %>
+      <p>
+        <i><%= @band.name() %></i> <%= @band.modifier() %> played the following Venues:
+      </p>
+      <ul>
+        <% @band.venues.each() do |venue| %>
+          <li><i><%= venue.name() %></i></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>
+        <i><%= @band.name() %></i> <%= @band.modifier() %>n't played any venues yet.  You can add them <a href="#add_venue_form">here.</a>
+      </p>
+    <% end %>
+  </div>
+
+  <!-- Add Venue to Band -->
   <br><br>
   <label for="add_venue_form">Add Venues for <i><%= @band.name() %></i></label>
   <form id="add_venue_form" action="/bands/<%= @band.id() %>/add_venue" method="post">
@@ -38,7 +40,7 @@
   </form>
 <% else %>
   <p>
-    If you'd like to add venues to this band, please create them <a href="/venues">here.</a>
+    If you'd like to add venues to this band, please create venues <a href="/venues">here.</a>
   </p>
 <% end %>
 

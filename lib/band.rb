@@ -3,6 +3,10 @@ class Band < ActiveRecord::Base
   validates(:name, {:presence => true})
   before_save(:capitalize_name)
 
+  define_method(:modifier) do
+    self.name.plural?() ? 'have' : 'has'
+  end
+
 private
   define_method(:capitalize_name) do
     capitalized_words = []
