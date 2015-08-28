@@ -37,3 +37,16 @@ patch('/bands/:id') do
   @band.update({:name => new_band_name})
   erb(:band)
 end
+
+# Create/Read Venues
+
+get('/venues') do
+  @venues = Venue.all()
+  erb(:venues)
+end
+
+post('/venues') do
+  Venue.create({:name => params.fetch('venue_name')})
+  @venues = Venue.all()
+  erb(:venues)
+end

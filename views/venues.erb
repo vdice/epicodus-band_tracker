@@ -1,0 +1,26 @@
+<h1>Manage Venues</h1>
+<br>
+
+<!-- Venues listing -->
+<% if @venues.any?() %>
+  <h3>Your Venues:</h3>
+  <ul>
+    <% @venues.each() do |venue| %>
+      <li><%= venue.name() %></li>
+    <% end %>
+  </ul>
+<% else %>
+<p>
+  You don't have any venues, yet!
+</p>
+<% end %>
+
+<!-- Venue creation -->
+<label for="new_venue_form">Add a New Venue</label>
+<form name="new_venue_form" action="/venues" method="post">
+  <div class="form-group">
+    <label for="venue_name">Venue Name</label>
+    <input type="text" name="venue_name" id="venue_name" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>

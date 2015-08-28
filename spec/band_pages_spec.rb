@@ -16,6 +16,7 @@ describe('the band pages', {:type => :feature}) do
       visit('/bands')
       fill_in('band_name', :with => 'the sonics')
       click_button('Add')
+      expect(page).to have_content('Your Bands:')
       expect(page).to have_content('The Sonics')
     end
   end
@@ -29,7 +30,7 @@ describe('the band pages', {:type => :feature}) do
       expect(page).to have_content('You don\'t have any bands to manage, yet!')
     end
   end
-  
+
   describe('updating a band\'s name') do
     it('allows the user to update a band\'s name') do
       band = Band.create({:name => 'The Sonics'})
