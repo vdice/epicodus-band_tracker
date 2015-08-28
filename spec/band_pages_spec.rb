@@ -19,4 +19,14 @@ describe('the band pages', {:type => :feature}) do
       expect(page).to have_content('The Sonics')
     end
   end
+
+  describe('deleting a band') do
+    it('allows the user to delete a band') do
+      band = Band.create({:name => 'The Sonics'})
+      visit('/bands')
+      click_link(band.name())
+      click_button('Delete')
+      expect(page).to have_content('You don\'t have any bands to manage, yet!')
+    end
+  end
 end

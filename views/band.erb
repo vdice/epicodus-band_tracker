@@ -1,0 +1,8 @@
+<h1>Band: <i><%= @band.name() %></i></h1>
+<br>
+
+<label for="delete_form">Delete</label>
+<form id="delete_form" action="/bands/<%= @band.id() %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" class="btn btn-danger">Delete</button>
+</form>
