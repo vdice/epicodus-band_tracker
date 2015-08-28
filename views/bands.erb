@@ -1,0 +1,26 @@
+<h1>Manage Bands</h1>
+<br>
+
+<!-- Bands listing -->
+<% if @bands.any?() %>
+  <h3>Here are your bands:</h3>
+  <ul>
+    <% @bands.each() do |band| %>
+      <li><a href="/bands/<%= band.id() %>"><%= band.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+<p>
+  You don't have any bands to manage, yet!
+</p>
+<% end %>
+
+<!-- Band creation -->
+<label for="new_band_form">Add a New Band</label>
+<form name="new_band_form" action="/bands" method="post">
+  <div class="form-group">
+    <label for="band_name">Band Name</label>
+    <input type="text" name="band_name" id="band_name" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
